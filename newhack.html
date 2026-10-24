@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f5f3">
+    <meta name="description" content="Create, review, approve, and publish on-brand content with Inkloom's GreenSteps brand governance workspace.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="application-name" content="Inkloom">
+    <meta name="keywords" content="brand governance, content review, content approval workflow, brand guidelines, creator insights">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Inkloom">
+    <meta property="og:title" content="Inkloom | Brand Content Review & Approval">
+    <meta property="og:description" content="Create, review, approve, and publish on-brand content in the GreenSteps workspace.">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Inkloom | Brand Content Review & Approval">
+    <meta name="twitter:description" content="A practical workspace for brand-safe content review, approvals, publishing, and insights.">
+    <title>Inkloom | Brand Content Review &amp; Approval Workspace</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org", 
+            "@type": "WebApplication",
+            "name": "Inkloom",
+            "description": "A brand governance workspace for creating, reviewing, approving, and publishing on-brand content.",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any",
+            "inLanguage": "en",
+            "featureList": [
+                "Content review against brand guidelines",
+                "Creator and manager approval workflows",
+                "Publishing and version history",
+                "Review insights and feedback"
+            ]
+        }
+    </script>
+    <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+    <a class="skip-link" href="#workspace">Skip to main content</a>
+    <div class="brand-splash" aria-hidden="true">
+        <div class="splash-lockup">
+            <span class="splash-mark">i</span>
+            <span class="splash-wordmark">inkloom</span>
+            <span class="splash-rule"></span>
+            <span class="splash-caption">BRAND WORKSPACE</span>
+        </div>
+    </div>
+    <div class="role-transition" id="roleTransition" aria-hidden="true" hidden>
+        <div class="role-transition-card" role="status" aria-live="polite">
+            <span class="role-transition-mark" id="roleTransitionMark" aria-hidden="true">AM</span>
+            <span class="role-transition-kicker">SWITCHING WORKSPACE</span>
+            <strong class="role-transition-title" id="roleTransitionTitle">Creator workspace</strong>
+            <span class="role-transition-caption" id="roleTransitionCaption">Your drafts and reviews are ready.</span>
+            <span class="role-transition-progress" aria-hidden="true"></span>
+        </div>
+    </div>
+    <header class="topbar">
+        <button class="round-back-btn" id="roundBackBtn" type="button" aria-label="Return to the starting draft" title="Return to the starting draft" hidden>←</button>
+        <a class="brand" href="#workspace" aria-label="Inkloom home">
+            <span class="brand-mark" aria-hidden="true">i</span>
+            <span>inkloom</span>
+        </a>
+        <nav class="top-nav" aria-label="Main navigation">
+            <a class="nav-link active" href="#workspace">Workspace</a>
+            <a class="nav-link" href="#insights">Insights</a>
+            <a class="nav-link" href="#manual">Manual</a>
+        </nav>
+        <div class="topbar-right">
+            <span class="privacy-label"><span aria-hidden="true">●</span> Private workspace</span>
+            <label class="header-role-picker">Viewing as
+                <select id="roleSelect" aria-label="Choose your role">
+                    <option value="creator">Creator</option>
+                    <option value="manager">Manager</option>
+                    <option value="reviewer">Authorised reviewer</option>
+                </select>
+            </label>
+            <span class="avatar" title="Alex Morgan" role="img" aria-label="Alex Morgan, Creator">AM</span>
+        </div>
+    </header>
+
+    <main class="page-shell" id="workspace" tabindex="-1">
+        <div id="workspaceView">
+        <section class="page-heading">
+            <div>
+                <div class="eyebrow">BRAND GOVERNANCE · CONTENT REVIEW</div>
+                <h1>GreenSteps</h1>
+                <p>Review brand content and keep every message on-brand.</p>
+            </div>
+            <div class="heading-meta">
+                <span class="saved-indicator"><span aria-hidden="true">●</span> Local-only demo</span>
+                <span class="workflow-pill" id="workflowStatus" role="status" aria-live="polite">Draft</span>
+            </div>
+        </section>
+
+        <section class="workflow-strip" aria-label="Review workflow">
+            <ol class="workflow-steps">
+                <li class="workflow-step active" id="draftStep" aria-current="step"><span aria-hidden="true">1</span><div><strong>Draft</strong><small>Create content</small></div></li>
+                <li class="workflow-connector" aria-hidden="true"></li>
+                <li class="workflow-step" id="reviewStep"><span aria-hidden="true">2</span><div><strong>Review</strong><small>Collaborate & resolve</small></div></li>
+                <li class="workflow-connector" aria-hidden="true"></li>
+                <li class="workflow-step" id="approvedStep"><span aria-hidden="true">3</span><div><strong>Approved</strong><small>Ready to publish</small></div></li>
+            </ol>
+        </section>
+
+        <div class="workspace-grid">
+            <section class="editor-panel panel" aria-labelledby="editorTitle">
+                <div class="panel-heading">
+                    <div>
+                        <div class="panel-kicker">WORKING DRAFT</div>
+                        <h2 id="editorTitle">GreenSteps launch announcement</h2>
+                    </div>
+                    <span class="version-label">Version <span id="versionNumber">1</span></span>
+                </div>
+                <div class="draft-controls">
+                    <label class="field-label" for="contentType">Content type</label>
+                    <select id="contentType">
+                        <option value="web">Website / landing page</option>
+                        <option value="social">Social media post</option>
+                        <option value="email">Marketing email</option>
+                        <option value="product">Product description</option>
+                        <option value="visual">Visual asset caption</option>
+                    </select>
+                    <input id="draftFile" type="file" accept=".txt,.md,.html,.htm,.csv,.png,.jpg,.jpeg,.webp">
+                    <label class="upload-button" for="draftFile"><span aria-hidden="true">↑</span> Import draft</label>
+                </div>
+                <label class="sr-only" for="editor">Draft content</label>
+                <div class="text-editor" id="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-describedby="wordCount draftSaveStatus" spellcheck="true">Our team is thrilled to launch GreenSteps sneakers. Our shoes are completely 100% waterproof and endorsed by NASA! This draft was written by our external marketing group for the Q3 release schedule. If you have questions, please look at the confidential pricing spreadsheet at internal-v2.xlsx.</div>
+                <div class="editor-footer">
+                    <span id="wordCount" aria-live="off">0 words</span>
+                    <span id="draftSaveStatus" role="status" aria-live="polite">Autosave is ready</span>
+                </div>
+                <div class="editor-actions">
+                    <button class="button button-secondary" id="checkAgainBtn" type="button">Check again</button>
+                    <button class="button button-primary" id="scanBtn" type="button"><span aria-hidden="true">✦</span> Review content</button>
+                    <button class="button button-primary" id="workflowActionBtn" type="button" hidden>Request approval</button>
+                </div>
+                <p class="sr-only" id="reviewAnnouncement" role="status" aria-live="polite" aria-atomic="true"></p>
+                <p class="privacy-note"><span aria-hidden="true">🔒</span> Drafts and imports stay in this browser prototype; nothing is uploaded.</p>
+            </section>
+
+            <aside class="analysis-column">
+                <section class="panel analysis-panel" aria-labelledby="analysisTitle">
+                    <div class="analysis-heading">
+                        <div>
+                            <div class="panel-kicker">GUIDELINE CHECK</div>
+                            <h2 id="analysisTitle">Review findings</h2>
+                        </div>
+                        <span class="findings-count" id="findingsCount">Not reviewed</span>
+                    </div>
+                    <div class="scan-summary" id="scanSummary" aria-live="off">
+                        <span class="summary-icon" aria-hidden="true">✦</span>
+                        <div><strong>Ready when you are</strong><p>Review your draft to see explainable suggestions from the GreenSteps demo guidelines.</p></div>
+                    </div>
+                    <div class="checks-row" aria-label="Review categories">
+                        <span>Tone</span><span>Claims</span><span>Privacy</span><span>Accessibility</span><span>Visuals</span>
+                    </div>
+                    <div class="issue-list" id="issueList"></div>
+                    <div class="analysis-footnote">Demo checks are rule-based examples, not legal or factual verification.</div>
+                </section>
+
+                <section class="panel collaboration-panel" aria-labelledby="collaborationTitle">
+                    <div class="panel-heading compact">
+                        <div><div class="panel-kicker">TEAM REVIEW</div><h2 id="collaborationTitle">Comments & activity</h2></div>
+                    </div>
+                    <form class="comment-form" id="commentForm">
+                        <label class="sr-only" for="commentInput">Add a review comment</label>
+                        <input id="commentInput" type="text" placeholder="Leave a note for your team…" maxlength="240" required>
+                        <button class="icon-button" type="submit" aria-label="Add comment">↑</button>
+                    </form>
+                    <ol class="activity-list" id="activityList" aria-label="Review activity"></ol>
+                </section>
+            </aside>
+        </div>
+        </div>
+
+        <section class="manager-view" id="managerView" aria-labelledby="managerTitle" hidden>
+            <div class="manager-page-heading">
+                <div>
+                    <div class="eyebrow">GREENSTEPS · MANAGER WORKSPACE</div>
+                    <h1 id="managerTitle">Approval inbox</h1>
+                    <p>Review submitted content that is waiting for your approval.</p>
+                </div>
+                <span class="pending-count" id="pendingApprovalCount">0 pending</span>
+            </div>
+                <div class="manager-inbox-tools" role="search" aria-label="Filter approval items">
+                    <label class="manager-search-label" for="managerSearch">Search title or content</label>
+                    <input id="managerSearch" type="search" placeholder="Search approval items…" autocomplete="off">
+                    <label class="manager-filter-label" for="managerFilter">Show</label>
+                    <select id="managerFilter">
+                        <option value="pending">Pending approvals</option>
+                        <option value="revised">Revised pending</option>
+                        <option value="changes_requested">Changes requested</option>
+                    </select>
+                    <span class="manager-filter-count" id="managerFilterCount" role="status" aria-live="polite"></span>
+                </div>
+                <div class="manager-inbox" id="managerInbox"></div>
+            <section class="manager-history-section" aria-labelledby="managerHistoryTitle">
+                <div class="history-heading">
+                    <div>
+                        <div class="panel-kicker">DECISION HISTORY</div>
+                        <h2 id="managerHistoryTitle">Previously approved</h2>
+                    </div>
+                    <span class="history-count" id="approvedCount" role="status" aria-live="polite">0 approved</span>
+                </div>
+                <div class="manager-history" id="managerHistory"></div>
+            </section>
+        </section>
+
+        <section class="insights-view" id="insights" aria-labelledby="insightsPageTitle" tabindex="-1" hidden>
+        <div class="insights-page-heading">
+            <div>
+                <div class="eyebrow">GREENSTEPS · REVIEW ACTIVITY</div>
+                <h1 id="insightsPageTitle">Review history</h1>
+                <p>Past content checks, findings, and reviewed drafts.</p>
+            </div>
+            <button class="button button-primary" id="newReviewBtn" type="button">New review</button>
+        </div>
+        <section class="insights-panel panel" aria-labelledby="insightsTitle">
+            <div class="insights-heading">
+                <div><div class="panel-kicker">TEAM PATTERNS</div><h2 id="insightsTitle">Guidance insights</h2></div>
+                <span class="insights-caption">Based on saved reviews</span>
+            </div>
+            <div class="insights-grid">
+                <article class="insight-card"><span class="insight-icon purple" aria-hidden="true">↗</span><div><strong id="repeatInsight">No repeated issues yet</strong><p>Common patterns to coach across the team</p></div></article>
+                <article class="insight-card"><span class="insight-icon amber" aria-hidden="true">?</span><div><strong id="guidanceInsight">Guidance looks clear</strong><p>Areas that may need a clearer guideline</p></div></article>
+                <article class="insight-card"><span class="insight-icon green" aria-hidden="true">✓</span><div><strong id="resolvedInsight">0 suggestions applied</strong><p>Changes made while preserving the draft</p></div></article>
+            </div>
+        </section>
+        <section class="rejection-section" aria-labelledby="rejectionTitle">
+            <div class="history-heading">
+                <div>
+                    <div class="panel-kicker">MANAGER FEEDBACK</div>
+                    <h2 id="rejectionTitle">Changes requested</h2>
+                </div>
+                <span class="history-count" id="rejectionCount" role="status" aria-live="polite">0 items</span>
+            </div>
+            <div class="rejection-list" id="rejectionList"></div>
+        </section>
+        <section class="history-section" aria-labelledby="historyTitle">
+            <div class="history-heading">
+                <div>
+                    <div class="panel-kicker">PAST REVIEWS</div>
+                    <h2 id="historyTitle">Reviewed content</h2>
+                </div>
+                <span class="history-count" id="historyCount" role="status" aria-live="polite">0 reviews</span>
+            </div>
+            <p class="history-notice" id="historyNotice" role="status" aria-live="polite" hidden></p>
+            <div class="review-history" id="reviewHistory"></div>
+        </section>
+        </section>
+
+        <section class="manual-view" id="manual" aria-labelledby="manualTitle" tabindex="-1" hidden>
+            <div class="insights-page-heading manual-page-heading">
+                <div>
+                    <div class="eyebrow">INKLOOM · GREENSTEPS HELP</div>
+                    <h1 id="manualTitle">User manual</h1>
+                    <p>A complete guide to creating, reviewing, approving, and publishing content.</p>
+                </div>
+                <a class="button button-primary manual-start-button" href="#workspace">Open workspace</a>
+            </div>
+
+            <nav class="manual-toc panel" aria-label="Manual contents">
+                <strong>In this guide</strong>
+                <a href="#manual-overview">How it works</a>
+                <a href="#manual-roles">Roles and navigation</a>
+                <a href="#manual-creator">Create and submit content</a>
+                <a href="#manual-review">Read review findings</a>
+                <a href="#manual-manager">Manager approvals and publishing</a>
+                <a href="#manual-insights">Insights and history</a>
+                <a href="#manual-statuses">Workflow statuses</a>
+                <a href="#manual-data">Drafts, privacy, and limits</a>
+                <a href="#manual-accessibility">Keyboard and accessibility</a>
+                <a href="#manual-troubleshooting">Troubleshooting</a>
+            </nav>
+
+            <div class="manual-content">
+                <section class="manual-section panel" id="manual-overview" aria-labelledby="manualOverviewTitle">
+                    <div class="panel-kicker">START HERE</div>
+                    <h2 id="manualOverviewTitle">How the workspace works</h2>
+                    <p>Inkloom is a GreenSteps brand-content workflow. A creator prepares a draft and runs the guideline review. When it is ready, the creator requests approval. A manager checks the submission, either requests changes or approves it, and can publish approved content.</p>
+                    <ol class="manual-flow">
+                        <li><strong>Create:</strong> choose a content type, write or import the draft, and review it.</li>
+                        <li><strong>Resolve:</strong> consider findings, make edits, and review the changed draft again.</li>
+                        <li><strong>Approve:</strong> submit the draft for a manager decision.</li>
+                        <li><strong>Publish:</strong> the manager approves and publishes it from the approval inbox.</li>
+                    </ol>
+                    <p class="manual-note"><strong>Important:</strong> the guideline checker is a rule-based demo. It is not legal advice, factual verification, or a substitute for human review.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-roles" aria-labelledby="manualRolesTitle">
+                    <div class="panel-kicker">NAVIGATION</div>
+                    <h2 id="manualRolesTitle">Roles and navigation</h2>
+                    <ul>
+                        <li><strong>Creator:</strong> edits and reviews drafts, requests approval, and uses Insights to view feedback and review history.</li>
+                        <li><strong>Manager:</strong> works from the Approval inbox to search submissions, request changes, approve, publish, and view prior decisions.</li>
+                        <li><strong>Authorised reviewer:</strong> can review drafts, approve them, and publish approved content in the shared workspace.</li>
+                    </ul>
+                    <p>Use the role selector in the header to switch views. <strong>Workspace</strong> opens the creator workspace or manager inbox according to the selected role. <strong>Insights</strong> is available to creators and reviewers. <strong>Manual</strong> stays available in every role.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-creator" aria-labelledby="manualCreatorTitle">
+                    <div class="panel-kicker">CREATOR WORKFLOW</div>
+                    <h2 id="manualCreatorTitle">Create and submit content</h2>
+                    <ol>
+                        <li>In Workspace, choose the content type: website/landing page, social post, marketing email, product description, or visual asset caption.</li>
+                        <li>Write in the Draft content editor. To import, choose <strong>Import draft</strong>; supported files include TXT, MD, HTML, HTM, CSV, PNG, JPG, JPEG, and WEBP. Imported files are read locally in this prototype.</li>
+                        <li>Select <strong>Review content</strong>. Read each finding and its explanation and recommendation. Use <strong>Apply suggestion</strong> only when the edit is appropriate, or <strong>Mark reviewed</strong> when a person must verify it.</li>
+                        <li>Edit the draft where needed, then select <strong>Check again</strong>. Any edit after a review invalidates the old review; run checks again before requesting approval.</li>
+                        <li>When no high-risk blockers remain, select <strong>Request approval</strong>. The submission appears in the Manager approval inbox.</li>
+                    </ol>
+                    <p>Draft changes autosave in the current browser. The save indicator shows when the draft is saving, saved, restored, or could not be saved.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-review" aria-labelledby="manualReviewTitle">
+                    <div class="panel-kicker">GUIDELINE CHECK</div>
+                    <h2 id="manualReviewTitle">Understand review findings</h2>
+                    <p>Findings are grouped by topic, with a severity, explanation, and (where available) a suggested edit. High-risk and critical findings block approval until resolved. Advisory findings can still be reviewed by the team.</p>
+                    <ul>
+                        <li><strong>Apply suggestion:</strong> replaces the matched wording with the suggested wording. Read the draft afterward to ensure the meaning is still correct.</li>
+                        <li><strong>Mark reviewed:</strong> records that a human verification is needed; it does not independently prove a claim is accurate.</li>
+                        <li><strong>Custom-copy changes:</strong> edits to copy that departs from the starting or approved text may be flagged for review. Treat the finding as a prompt to verify, not an automatic rejection.</li>
+                    </ul>
+                    <p>When a finding is stale because the draft changed, run the review again to refresh findings. The editor’s word count and the live workflow status update as you work.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-manager" aria-labelledby="manualManagerTitle">
+                    <div class="panel-kicker">MANAGER WORKFLOW</div>
+                    <h2 id="manualManagerTitle">Review approvals and publish</h2>
+                    <ol>
+                        <li>Open the Approval inbox. Search by title or content, and use the filter to show pending approvals, revised pending submissions, or items with changes requested.</li>
+                        <li>Open and read the submitted content. For revised content, expand the comparison to inspect the previous and current versions. Review guideline findings and version history as needed.</li>
+                        <li>Select <strong>Approve content</strong> to approve the submission, or enter a clear explanation in the feedback field and select <strong>Request changes</strong>. A reason is required so the creator knows what to address.</li>
+                        <li>After approval, select <strong>Publish</strong> to publish the approved version. The latest published content becomes the starting point for the creator’s next draft.</li>
+                    </ol>
+                    <p>Published and approved items are listed under <strong>Previously approved</strong>. The creator can see manager feedback in Insights and choose <strong>Review again</strong> to reopen rejected content for revision and resubmission.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-insights" aria-labelledby="manualInsightsTitle">
+                    <div class="panel-kicker">HISTORY AND FEEDBACK</div>
+                    <h2 id="manualInsightsTitle">Insights and history</h2>
+                    <p>Insights brings together team guidance patterns, manager-requested changes, and previously reviewed content. Expand a review to read its saved draft, findings, and any available version timeline. The manager’s decision history is available in the Manager inbox.</p>
+                    <p>Use <strong>New review</strong> to return to the workspace and start another review. Review history and approval records are stored in this browser and may not be shared with other devices.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-statuses" aria-labelledby="manualStatusesTitle">
+                    <div class="panel-kicker">STATUS REFERENCE</div>
+                    <h2 id="manualStatusesTitle">Workflow statuses</h2>
+                    <dl class="manual-status-list">
+                        <div><dt>Draft</dt><dd>Content is editable and has not been submitted for approval.</dd></div>
+                        <div><dt>Awaiting approval</dt><dd>A creator submitted the current reviewed version to the manager.</dd></div>
+                        <div><dt>Changes requested</dt><dd>The manager returned feedback. Reopen the item from Insights, revise it, review again, and resubmit.</dd></div>
+                        <div><dt>Approved</dt><dd>A manager or authorised reviewer approved the submission; the manager can publish it.</dd></div>
+                        <div><dt>Published</dt><dd>The approved version is published and becomes the latest starting copy for a new creator draft.</dd></div>
+                    </dl>
+                </section>
+
+                <section class="manual-section panel" id="manual-data" aria-labelledby="manualDataTitle">
+                    <div class="panel-kicker">LOCAL DEMO</div>
+                    <h2 id="manualDataTitle">Drafts, privacy, and prototype limits</h2>
+                    <p>This is a browser-based prototype. Drafts, review history, approval decisions, and inbox filters are stored in this browser’s local storage. The page does not upload drafts to a server, sync them to other devices, or provide real user accounts or access control.</p>
+                    <p>Use sample or non-sensitive content only. Browser storage can be cleared by browser settings, private browsing, or device changes. The app’s “Private workspace” label describes the local demo behavior; it is not a security or confidentiality guarantee.</p>
+                </section>
+
+                <section class="manual-section panel" id="manual-accessibility" aria-labelledby="manualAccessibilityTitle">
+                    <div class="panel-kicker">INCLUSIVE USE</div>
+                    <h2 id="manualAccessibilityTitle">Keyboard and accessibility</h2>
+                    <ul>
+                        <li>Use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> to move through controls; use <kbd>Enter</kbd> or <kbd>Space</kbd> to activate links and buttons.</li>
+                        <li>Use the “Skip to main content” link at the start of keyboard navigation to bypass the header.</li>
+                        <li>Expandable version comparisons and saved content use standard disclosure controls; activate their summary to open or close them.</li>
+                        <li>The interface provides visible focus, status announcements, and reduced-motion support. Your operating system’s forced-colors settings are supported.</li>
+                    </ul>
+                </section>
+
+                <section class="manual-section panel" id="manual-troubleshooting" aria-labelledby="manualTroubleshootingTitle">
+                    <div class="panel-kicker">HELP</div>
+                    <h2 id="manualTroubleshootingTitle">Troubleshooting</h2>
+                    <dl class="manual-faq">
+                        <div><dt>My approval button is disabled. Why?</dt><dd>Resolve all high-risk and critical findings, then run the review again. The action becomes available when no blockers remain.</dd></div>
+                        <div><dt>Why did my review findings disappear?</dt><dd>Editing a draft invalidates its previous review. Select <strong>Check again</strong> to review the latest version.</dd></div>
+                        <div><dt>Where can I find a rejected submission?</dt><dd>Creators can find manager feedback under Insights → Changes requested, then select <strong>Review again</strong>.</dd></div>
+                        <div><dt>Why can’t I see content I saved on another device?</dt><dd>This prototype stores data only in the current browser and does not synchronize between devices.</dd></div>
+                        <div><dt>Can the guideline review verify factual or legal claims?</dt><dd>No. Findings are demo rule matches. A qualified person must verify facts, claims, rights, and final publication readiness.</dd></div>
+                    </dl>
+                </section>
+            </div>
+        </section>
+        <footer class="page-footer">INKLOOM PROTOTYPE <span>·</span> Clear guidance. Confident publishing.</footer>
+    </main>
+    <script src="scriptt.js"></script>
+</body>
+</html>
